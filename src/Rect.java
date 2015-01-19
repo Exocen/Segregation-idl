@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 public class Rect extends JComponent {
     public Object[][] donnees;
     private Color red = new Color(255, 0, 0);
-    private Color blue = new Color(0, 0, 255);
+    private Color blue = new Color(0, 0, 0);
     private Color green = new Color(0, 255, 0);
 
     public void Set_Rect(Object[][] o) {

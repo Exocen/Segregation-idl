@@ -29,6 +29,7 @@ public class Frame extends JFrame implements ActionListener, Observer {
     public int nb_habitants;
     public double[] hapiness_hab;
     public double moy_hapiness = 0;
+    public int hapiness_needed = 4;
     public String s_log="";
 
     public Frame() {
@@ -41,9 +42,9 @@ public class Frame extends JFrame implements ActionListener, Observer {
         this.add(arret, BorderLayout.SOUTH);
         arret.addActionListener(this);
         ss.addActionListener(this);
-        this.nb_habitants = length_map * 65;
+        this.nb_habitants = length_map * ((length_map/2)-10);
         this.hapiness_hab = new double[nb_habitants*2];
-        env = constructor(nb_habitants, nb_habitants, 4, length_map);
+        env = constructor(nb_habitants, nb_habitants, hapiness_needed, length_map);
         data = new Object[length_map][length_map];
         Rect jc = new Rect();
         jc.Set_Rect(data);
@@ -78,7 +79,9 @@ public class Frame extends JFrame implements ActionListener, Observer {
         }
         time++;
         get_moy_hapiness();
-        s_log+=time+" "+moy_hapiness+"\n";
+        double percentage_beehavior = hapiness_needed * 12.5 ;
+        System.out.println(percentage_beehavior);
+        s_log+=time+" "+moy_hapiness+" "+percentage_beehavior+"\n";
 
         try {
             Thread.sleep(slow);
