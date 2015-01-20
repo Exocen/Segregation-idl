@@ -1,16 +1,14 @@
-/**
- * Created by exo on 19/01/15.
- */
 public class Main {
 
     public static void main(String[] args) {
-        Frame sm = new Frame();
-        sm.dIt();
-        while (sm.launch) {
+        SMA sm = new SMA();
+
+        while (sm.get_launch()) {
             sm.play_it();
         }
-        sm.dispose();
-        sm.write_file(sm.s_log,"Hapiness.log");
+        sm.stop_it();
+        Logger log = new Logger("Satisfaction.log");
+        log.write_file(sm.s_log);
         System.out.println("Sortie...");
     }
 

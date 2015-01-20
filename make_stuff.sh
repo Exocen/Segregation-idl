@@ -1,3 +1,4 @@
+#!/bin/sh
 java -jar segreg.jar
 gnuplot plot_pop
 echo "done"

@@ -10,12 +10,8 @@ public class Habitant extends Agent {
 
     public Habitant(Env e, int x, int y, String color, int tolerance) {
         super(e, x, y);
-        this.env = e;
-        this.posX = x;
-        this.posY = y;
         this.color = color;
         this.tolerance = tolerance;
-        env.map[posX][posY] = this;
     }
 
     @Override
@@ -66,7 +62,7 @@ public class Habitant extends Agent {
         }
     }
 
-    public double get_hapiness(){
+    public double get_satisfaction(){
     return (8 - this.nb_ennemis)*12.5;
     }
 
