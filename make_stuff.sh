@@ -7,11 +7,10 @@ if [[ $# -eq 0 ]] ; then
 fi
 case "$1" in
     0) java -jar segregation.jar 0
-       sh make_seg_graph.sh;;
+        sh make_fish_graph.sh   ;;
     1) java -jar segregation.jar 1
-     sh make_fish_graph.sh
-     ;;
-    *) echo 'Mauvais Argument' ;;
+        sh make_seg_graph.sh    ;;
+    *) echo 'Mauvais Argument'  ;;
 esac
 echo "done"
 exit 0
