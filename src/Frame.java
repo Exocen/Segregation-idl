@@ -44,13 +44,14 @@ public class Frame extends JFrame implements ActionListener {
         }
     }
 
-    public boolean get_play(){
+    public boolean get_play() {
         return this.play;
     }
 
-    public boolean get_launch(){
+    public boolean get_launch() {
         return this.launch;
     }
+
 
     //Implémentation du pattern observer
     public void update() {

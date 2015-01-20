@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public  class SMA {
+public class SMA_Seg {
 
     private Frame frame;
 
@@ -21,13 +21,12 @@ public  class SMA {
     public double[] satisfaction_hab;
     public double moy_satisfaction = 0;
     public int tolerance = 4;
-    public String s_log="";
+    public String s_log = "";
 
-    public SMA(){
+    public SMA_Seg() {
 
-
-        this.nb_habitants = length_map * ((length_map/2)-10);
-        this.satisfaction_hab = new double[nb_habitants*2];
+        this.nb_habitants = length_map * ((length_map / 2) - 10);
+        this.satisfaction_hab = new double[nb_habitants * 2];
         env = constructor(nb_habitants, nb_habitants, tolerance, length_map);
         data = new Object[length_map][length_map];
         Rect rect = new Rect();
@@ -58,8 +57,8 @@ public  class SMA {
         }
         time++;
         get_moy_hapiness();
-        double percentage_beehavior = tolerance * 12.5 ;
-        s_log+=time+" "+ moy_satisfaction +" "+percentage_beehavior+"\n";
+        double percentage_beehavior = tolerance * 12.5;
+        s_log += time + " " + moy_satisfaction + " " + percentage_beehavior + "\n";
 
         try {
             Thread.sleep(slow);
@@ -91,12 +90,12 @@ public  class SMA {
         }
     }
 
-    private void get_moy_hapiness(){
-        int total=0;
-        for (double i : satisfaction_hab){
-            total+=i;
+    private void get_moy_hapiness() {
+        int total = 0;
+        for (double i : satisfaction_hab) {
+            total += i;
         }
-        moy_satisfaction =(total/(nb_habitants*2));
+        moy_satisfaction = (total / (nb_habitants * 2));
     }
 
     /*
@@ -155,10 +154,12 @@ public  class SMA {
         return (rand.nextInt(max - min + 1) + min);
     }
 
-    public void stop_it(){
+    public void stop_it() {
         frame.dispose();
     }
 
-    public boolean get_launch(){return frame.get_launch();}
+    public boolean get_launch() {
+        return frame.get_launch();
+    }
 
 }

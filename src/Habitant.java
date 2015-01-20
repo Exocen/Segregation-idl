@@ -14,8 +14,9 @@ public class Habitant extends Agent {
         this.tolerance = tolerance;
     }
 
-    @Override
+
     protected void doIt() {
+        age++;
         boolean b = true;
         zone_build(posX, posY);
         int i = 0;
@@ -36,7 +37,7 @@ public class Habitant extends Agent {
         }
     }
 
-    @Override
+
     protected void zone_build(int x, int y) {
         nb_copain = 0;
         nb_ennemis = 0;
@@ -62,11 +63,10 @@ public class Habitant extends Agent {
         }
     }
 
-    public double get_satisfaction(){
-    return (8 - this.nb_ennemis)*12.5;
+    public double get_satisfaction() {
+        return (8 - this.nb_ennemis) * 12.5;
     }
 
-    @Override
     public String toString() {
         return this.color;
     }

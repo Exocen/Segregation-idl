@@ -3,9 +3,6 @@ import java.awt.*;
 
 public class Rect extends JComponent {
     public Object[][] donnees;
-    private Color red = new Color(255, 0, 0);
-    private Color blue = new Color(0, 0, 0);
-    private Color green = new Color(0, 255, 0);
 
     public void Set_Rect(Object[][] o) {
         donnees = o;
@@ -17,13 +14,17 @@ public class Rect extends JComponent {
         for (Object[] i : donnees) {
             for (Object j : i) {
                 if (j == null) {
-                    g.setColor(blue);
+                    g.setColor(Color.black);
                 } else if (j.toString().equals(" ")) {
-                    g.setColor(blue);
+                    g.setColor(Color.blue);
                 } else if (j.toString().equals("R")) {
-                    g.setColor(red);
+                    g.setColor(Color.red);
                 } else if (j.toString().equals("V")) {
-                    g.setColor(green);
+                    g.setColor(Color.green);
+                } else if (j.toString().equals("S")) {
+                    g.setColor(Color.red);
+                } else if (j.toString().equals("T")) {
+                    g.setColor(Color.green);
                 }
 
                 g.fillRect(x, y, 5, 5);

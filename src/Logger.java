@@ -5,7 +5,7 @@ public class Logger {
 
     private String file_name;
 
-    public Logger(String file_name){
+    public Logger(String file_name) {
         this.file_name = file_name;
     }
 

@@ -5,9 +5,11 @@ public class Agent {
     protected int posX;
     protected int posY;
     protected Env env;
-
+    protected String[] zone;
+    protected int age = 0;
 
     public Agent(Env e, int x, int y) {
+        this.zone = new String[8];
         this.env = e;
         this.posX = x;
         this.posY = y;
@@ -15,6 +17,12 @@ public class Agent {
     }
 
     protected void doIt() {
+        age++;
+        zone_build();
+    }
+
+    protected void reproduce(int x, int y) {
+
     }
 
     protected int get_alea(int min, int max) {
@@ -29,7 +37,14 @@ public class Agent {
         env.map[posX][posY] = this;
     }
 
+    protected void zone_build() {
+    }
+
     protected void zone_build(int x, int y) {
+    }
+
+    public int get_age() {
+        return age;
     }
 
     protected int[] coordinate(int x) {
