@@ -1,4 +1,4 @@
 #!/bin/sh
 gnuplot plot_seg
-echo "done"
+echo "Graph done"
 exit 0

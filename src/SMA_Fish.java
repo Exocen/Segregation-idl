@@ -56,7 +56,9 @@ public class SMA_Fish {
         if (frame.get_play()) {
             dIt();
 
-           // if (nb_tuna == 0 || nb_shark == 0) {frame.dispose(); }
+            if (nb_tuna == 0 || nb_shark == 0) {
+                frame.dispose();
+            }
         }
     }
 
