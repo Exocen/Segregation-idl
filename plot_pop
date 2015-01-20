@@ -1,0 +1,6 @@
+set title "Population Shark Tuna"
+set xlabel "Shark"
+set ylabel "Tuna"
+set term png
+set out "pop_shark_fish.png"
+plot "graph_pop.log" u 1:2 w l title "Sharks/Tuna"

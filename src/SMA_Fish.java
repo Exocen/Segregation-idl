@@ -95,12 +95,12 @@ public class SMA_Fish {
         int sa[] = new int[l];
 
         for (Agent a : agents) {
-            if (a.toString().equals("F")) {
+            if (a.toString().equals("T")) {
                 if (a.get_age() < l) {
                     fa[a.get_age()]++;
                 }
             }
-            if (a.toString().equals("T")) {
+            if (a.toString().equals("S")) {
                 if (a.get_age() < l) {
                     sa[a.get_age()]++;
                 }
