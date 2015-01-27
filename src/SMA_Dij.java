@@ -7,7 +7,6 @@ public class SMA_Dij {
     private Frame frame;
 
     public static ArrayList<Agent> agents = new ArrayList<Agent>();
-    public ArrayList<Agent> agents_alea = new ArrayList<Agent>();
 
     public final int length_map = 50;
     public int time = 0;
@@ -19,12 +18,12 @@ public class SMA_Dij {
     public Env env;
     public int nb_Prey = 1;
     public int nb_Hunter = 2;
-    public int tolerance = 4;
+    public int nb_wall = 50;
     public String s_log = "";
 
     public SMA_Dij() {
 
-        env = constructor(nb_Prey, nb_Hunter, tolerance, length_map);
+        env = constructor(nb_Prey, nb_Hunter, nb_wall, length_map);
         data = new Object[length_map][length_map];
         Rect rect = new Rect();
         rect.Set_Rect(data);
@@ -36,7 +35,12 @@ public class SMA_Dij {
 
     public void play_it() {
         if (frame.get_play()) {
+
             dIt();
+
+            if (get_pop() == 0 ) {
+                frame.set_play(false);
+            }
         }
     }
 
@@ -44,11 +48,11 @@ public class SMA_Dij {
      * Do the stuff ^^
      */
     private void dIt() {
+
         readable_env();
-        randomize_agents();
         int i = 0;
-        while (i < agents_alea.size()) {
-            Agent a = agents_alea.get(i);
+        while (i < agents.size()) {
+            Agent a = agents.get(i);
             a.doIt();
             i++;
         }
@@ -73,8 +77,11 @@ public class SMA_Dij {
         for (Agent i[] : env.map) {
             for (Agent j : i) {
                 if (j == null) {
-                    data[i2][j2] = " ";
-                } else {
+                    if (env.dijstra[i2][j2]==-1){
+                        data[i2][j2] = "W";}
+                    else{  data[i2][j2] = " ";}
+                }
+                else {
                     data[i2][j2] = "" + j.toString();
                 }
                 j2++;
@@ -84,15 +91,36 @@ public class SMA_Dij {
         }
     }
 
+    public int get_pop() {
+        nb_Prey = 0;
 
-    private Env constructor(int nb_green, int nb_red, int tolerance, int lenght_map) {
+        for (int i = 0; i < agents.size(); i++) {
+            if (agents.get(i).toString().equals("P")) {
+                nb_Prey++;
+            }
+        }
+        return nb_Prey;
+    }
+
+    private Env constructor(int preys, int hunters, int walls, int lenght_map) {
         Env env = new Env(lenght_map, lenght_map);
-        for (int i = 0; i < nb_green; i++) {
+        for (int i = 0; i < walls; i++) {
             boolean search = true;
             while (search) {
                 int x = get_alea(0, lenght_map - 1);
                 int y = get_alea(0, lenght_map - 1);
-                if (env.map[x][y] == null) {
+                if (env.map[x][y] == null && env.dijstra[x][y]!=-1) {
+                    env.dijstra[x][y]=-1;
+                    search = false;
+                }
+            }
+        }
+        for (int i = 0; i < preys; i++) {
+            boolean search = true;
+            while (search) {
+                int x = get_alea(0, lenght_map - 1);
+                int y = get_alea(0, lenght_map - 1);
+                if (env.map[x][y] == null && env.dijstra[x][y]!=-1) {
                     Prey f = new Prey(env, x, y);
                     agents.add(f);
                     search = false;
@@ -100,12 +128,12 @@ public class SMA_Dij {
             }
         }
 
-        for (int i = 0; i < nb_red; i++) {
+        for (int i = 0; i < hunters; i++) {
             boolean search = true;
             while (search) {
                 int x = get_alea(0, lenght_map - 1);
                 int y = get_alea(0, lenght_map - 1);
-                if (env.map[x][y] == null) {
+                if (env.map[x][y] == null && env.dijstra[x][y]!=-1) {
                     Hunter s = new Hunter(env, x, y);
                     agents.add(s);
                     search = false;
@@ -114,12 +142,6 @@ public class SMA_Dij {
         }
 
         return env;
-    }
-
-
-    private void randomize_agents() {
-        this.agents_alea = agents;
-        Collections.shuffle(agents_alea);
     }
 
     private int get_alea(int min, int max) {

@@ -48,6 +48,10 @@ public class Frame extends JFrame implements ActionListener {
         return this.play;
     }
 
+    public void set_play(boolean b) {
+        this.play=b;
+    }
+
     public boolean get_launch() {
         return this.launch;
     }

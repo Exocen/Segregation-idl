@@ -21,6 +21,7 @@ public class Prey extends Agent {
                         x = coord[0];
                         y = coord[1];
                         i = zone.length + 1;//sortie de boucle
+
                     } else {
                         ite++;
                     }
@@ -42,34 +43,37 @@ public class Prey extends Agent {
 
 
     public void make_dijstra() {
-        System.out.println("tada");
         env.dijstra[posX][posY] = 1;
         int x = posX;
         int y = posY;
         int a = 0;
 
 
+
         int fy, fx;
-        for (int i = 1; a < env.map_lenght * env.map_lenght; i++) {
+        for (int i = 1; a < (env.map_lenght * env.map_lenght)-50; i++) {
             y++;
             x++;
-            // System.out.println("i="+i+" a="+a+" x="+x+"  y="+y);
 
+            System.out.println(a +" "+i           );
             if (x < env.map_lenght
                     && x >= 0
                     && y < env.map_lenght
-                    && y >= 0) {
+                    && y >= 0
+                    && env.dijstra[x][y]!=-1
+                    ) {
                 a++;
                 env.dijstra[x][y] = getmin(x, y);
             }
             //*
             fy = posY - i;
             while (y != fy) {
-                //System.out.println("y="+y+"  y+i="+(y-i));
                 if (x < env.map_lenght
                         && x >= 0
                         && y < env.map_lenght
-                        && y >= 0) {
+                        && y >= 0
+                        && env.dijstra[x][y]!=-1
+                        ) {
                     a++;
                     env.dijstra[x][y] = getmin(x, y);
                 }
@@ -81,7 +85,9 @@ public class Prey extends Agent {
                 if (x < env.map_lenght
                         && x >= 0
                         && y < env.map_lenght
-                        && y >= 0) {
+                        && y >= 0
+                        && env.dijstra[x][y]!=-1
+                        ) {
                     a++;
                     env.dijstra[x][y] = getmin(x, y);
                 }
@@ -94,7 +100,9 @@ public class Prey extends Agent {
                 if (x < env.map_lenght
                         && x >= 0
                         && y < env.map_lenght
-                        && y >= 0) {
+                        && y >= 0
+                        && env.dijstra[x][y]!=-1
+                        ) {
                     a++;
                     env.dijstra[x][y] = getmin(x, y);
                 }
@@ -107,7 +115,9 @@ public class Prey extends Agent {
                 if (x < env.map_lenght
                         && x >= 0
                         && y < env.map_lenght
-                        && y >= 0) {
+                        && y >= 0
+                        && env.dijstra[x][y]!=-1
+                        ) {
                     a++;
                     env.dijstra[x][y] = getmin(x, y);
                 }
@@ -115,7 +125,7 @@ public class Prey extends Agent {
             }
 
         }
-        render_console(env);
+        //render_console(env);
     }
 
 
@@ -142,7 +152,7 @@ public class Prey extends Agent {
                     && x2 >= 0
                     && y2 < env.map_lenght
                     && y2 >= 0) {
-                if (env.dijstra[x2][y2] > 0 ) {
+                if (env.dijstra[x2][y2] > 0) {
                     if (min > env.dijstra[x2][y2]) {
                         min = env.dijstra[x2][y2];
                     }
@@ -155,6 +165,33 @@ public class Prey extends Agent {
         return ++min;
     }
 
+
+
+    protected void zone_build() {
+        zone = new String[8];
+        empty_case = 0;
+        for (int i = 0; i <= 7; i++) {
+            int[] emp = coordinate(i);
+            int x2 = posX + emp[0];
+            int y2 = posY + emp[1];
+            if (x2 < env.map_lenght
+                    && x2 >= 0
+                    && y2 < env.map_lenght
+                    && y2 >= 0) {
+                if (env.map[x2][y2] == null) {
+                    if (env.dijstra[x2][y2]==-1){
+                        zone[i] = "W";}
+                    else {
+                        zone[i] = "E";
+                        empty_case++;
+                    }
+                } else {
+                    zone[i] = env.map[x2][y2].toString();
+
+                }
+            }
+        }
+    }
 
     public String toString() {
         return "P";

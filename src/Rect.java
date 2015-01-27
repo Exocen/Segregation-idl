@@ -30,6 +30,9 @@ public class Rect extends JComponent {
                 } else if (j.toString().equals("H")) {
                     g.setColor(Color.red);
                 }
+                else if (j.toString().equals("W")) {
+                    g.setColor(Color.black);
+                }
 
                 g.fillRect(x, y, 5, 5);
                 x += 6;
