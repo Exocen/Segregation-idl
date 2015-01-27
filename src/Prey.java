@@ -32,8 +32,6 @@ public class Prey extends Agent {
             }
             int x2 = posX + x;
             int y2 = posY + y;
-            int old_posX = posX;
-            int old_posY = posY;
             set_pos(x2, y2);
 
             make_dijstra();
@@ -48,32 +46,18 @@ public class Prey extends Agent {
         int y = posY;
         int a = 0;
 
-
-
         int fy, fx;
-        for (int i = 1; a < (env.map_lenght * env.map_lenght)-50; i++) {
+        for (int i = 1; a < (env.map_lenght * env.map_lenght)-(env.nb_obsta); i++) {
             y++;
             x++;
 
-            System.out.println(a +" "+i           );
-            if (x < env.map_lenght
-                    && x >= 0
-                    && y < env.map_lenght
-                    && y >= 0
-                    && env.dijstra[x][y]!=-1
-                    ) {
+            if (x < env.map_lenght && x >= 0 && y < env.map_lenght && y >= 0 && env.dijstra[x][y]!=-1 ) {
                 a++;
-                env.dijstra[x][y] = getmin(x, y);
-            }
-            //*
+                env.dijstra[x][y] = getmin(x, y); }
+
             fy = posY - i;
             while (y != fy) {
-                if (x < env.map_lenght
-                        && x >= 0
-                        && y < env.map_lenght
-                        && y >= 0
-                        && env.dijstra[x][y]!=-1
-                        ) {
+                if (x < env.map_lenght && x >= 0 && y < env.map_lenght && y >= 0 && env.dijstra[x][y]!=-1 ) {
                     a++;
                     env.dijstra[x][y] = getmin(x, y);
                 }
@@ -82,12 +66,7 @@ public class Prey extends Agent {
             }
             fx = posX - i;
             while (x != fx) {
-                if (x < env.map_lenght
-                        && x >= 0
-                        && y < env.map_lenght
-                        && y >= 0
-                        && env.dijstra[x][y]!=-1
-                        ) {
+                if (x < env.map_lenght && x >= 0 && y < env.map_lenght && y >= 0 && env.dijstra[x][y]!=-1 ) {
                     a++;
                     env.dijstra[x][y] = getmin(x, y);
                 }
@@ -97,12 +76,7 @@ public class Prey extends Agent {
             fy = posY + i;
             while (y != fy) {
 
-                if (x < env.map_lenght
-                        && x >= 0
-                        && y < env.map_lenght
-                        && y >= 0
-                        && env.dijstra[x][y]!=-1
-                        ) {
+                if (x < env.map_lenght && x >= 0 && y < env.map_lenght && y >= 0 && env.dijstra[x][y]!=-1 ) {
                     a++;
                     env.dijstra[x][y] = getmin(x, y);
                 }
@@ -112,12 +86,7 @@ public class Prey extends Agent {
             fx = posX + i;
             while (x != fx) {
 
-                if (x < env.map_lenght
-                        && x >= 0
-                        && y < env.map_lenght
-                        && y >= 0
-                        && env.dijstra[x][y]!=-1
-                        ) {
+                if (x < env.map_lenght && x >= 0 && y < env.map_lenght && y >= 0 && env.dijstra[x][y]!=-1 ) {
                     a++;
                     env.dijstra[x][y] = getmin(x, y);
                 }
@@ -125,25 +94,11 @@ public class Prey extends Agent {
             }
 
         }
-        //render_console(env);
     }
-
-
-    public void render_console(Env e) {
-        for (int i[] : e.dijstra) {
-            for (int j : i) {
-                System.out.print(j + "|");
-
-            }
-            System.out.println();
-        }
-        System.out.println("------------------------------------------------------------");
-    }
-
 
     protected int getmin(int x, int y) {
-        int min = 999999;
-        empty_case = 0;
+        int min = 0;
+        boolean change = false;
         for (int i = 0; i <= 7; i++) {
             int[] emp = coordinate(i);
             int x2 = x + emp[0];
@@ -153,13 +108,14 @@ public class Prey extends Agent {
                     && y2 < env.map_lenght
                     && y2 >= 0) {
                 if (env.dijstra[x2][y2] > 0) {
-                    if (min > env.dijstra[x2][y2]) {
+                    if (min > env.dijstra[x2][y2] || !change) {
+                        change = true;
                         min = env.dijstra[x2][y2];
                     }
                 }
             }
         }
-        if (min == 999999) {
+        if (!change) {
             min = 0;
         }
         return ++min;

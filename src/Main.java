@@ -32,7 +32,8 @@ public class Main {
             } else {
                 System.out.println("Veuillez indiquer un argument\n" +
                         "0 pour l'application Fish\n" +
-                        "1 pour l'application Segregation");
+                        "1 pour l'application Segregation\n" +
+                        "Rien pour l'application Dijstra");
             }
         } else {
             SMA_Dij sm = new SMA_Dij();

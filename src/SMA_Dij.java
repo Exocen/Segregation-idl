@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 public class SMA_Dij {
@@ -16,10 +15,9 @@ public class SMA_Dij {
     public final int slow = 50;
     public Object[][] data;
     public Env env;
-    public int nb_Prey = 1;
+    public final int nb_Prey = 1;
     public int nb_Hunter = 2;
     public int nb_wall = 50;
-    public String s_log = "";
 
     public SMA_Dij() {
 
@@ -40,6 +38,18 @@ public class SMA_Dij {
 
             if (get_pop() == 0 ) {
                 frame.set_play(false);
+                for (int i = 0; i < nb_Prey; i++) {
+                    boolean search = true;
+                    while (search) {
+                        int x = get_alea(0, this.length_map - 1);
+                        int y = get_alea(0, this.length_map - 1);
+                        if (env.map[x][y] == null && env.dijstra[x][y]!=-1) {
+                            Prey prey = new Prey(env, x, y);
+                            agents.add(prey);
+                            search = false;
+                        }
+                    }
+                }
             }
         }
     }
@@ -92,10 +102,10 @@ public class SMA_Dij {
     }
 
     public int get_pop() {
-        nb_Prey = 0;
+        int nb_Prey = 0;
 
-        for (int i = 0; i < agents.size(); i++) {
-            if (agents.get(i).toString().equals("P")) {
+        for (Agent agent : agents) {
+            if (agent.toString().equals("P")) {
                 nb_Prey++;
             }
         }
@@ -103,7 +113,7 @@ public class SMA_Dij {
     }
 
     private Env constructor(int preys, int hunters, int walls, int lenght_map) {
-        Env env = new Env(lenght_map, lenght_map);
+        Env env = new Env(lenght_map, lenght_map, preys + hunters + walls);
         for (int i = 0; i < walls; i++) {
             boolean search = true;
             while (search) {
