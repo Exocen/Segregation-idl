@@ -6,6 +6,9 @@ public class Prey extends Agent {
         super(e, x, y);
     }
 
+    /**
+     * La proie se déplace aléatoirement
+     */
     protected void doIt() {
         super.doIt();
         if (empty_case != 0) {
@@ -40,6 +43,9 @@ public class Prey extends Agent {
     }
 
 
+    /**
+     * Le calcul de dijstra se fait en cercle autour de la proie
+     */
     public void make_dijstra() {
         env.dijstra[posX][posY] = 1;
         int x = posX;
@@ -96,6 +102,12 @@ public class Prey extends Agent {
         }
     }
 
+    /**
+     *
+     * @param x position
+     * @param y position
+     * @return la valeur minimale
+     */
     protected int getmin(int x, int y) {
         int min = 0;
         boolean change = false;

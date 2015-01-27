@@ -8,6 +8,10 @@ public class Hunter extends Agent {
         env.dijstra[x][y]=-1;
     }
 
+
+    /**
+     * Le chasseur cherche le nombre minimal le plus proche de lui pour se déplacer
+     */
     protected void doIt() {
         super.doIt();
         int min = 0;

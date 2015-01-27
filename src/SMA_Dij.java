@@ -15,8 +15,8 @@ public class SMA_Dij {
     public final int slow = 50;
     public Object[][] data;
     public Env env;
-    public final int nb_Prey = 1;
-    public int nb_Hunter = 2;
+    public final int nb_Prey = 3;
+    public int nb_Hunter = 10;
     public int nb_wall = 50;
 
     public SMA_Dij() {
@@ -30,7 +30,9 @@ public class SMA_Dij {
 
     }
 
-
+    /**
+     * Si le chasseur a tué la dernière proie elle(s) est(sont) recrée(s)
+     */
     public void play_it() {
         if (frame.get_play()) {
 
@@ -45,7 +47,7 @@ public class SMA_Dij {
                         int y = get_alea(0, this.length_map - 1);
                         if (env.map[x][y] == null && env.dijstra[x][y]!=-1) {
                             Prey prey = new Prey(env, x, y);
-                            agents.add(prey);
+                            agents.add(0, prey);
                             search = false;
                         }
                     }
@@ -101,6 +103,9 @@ public class SMA_Dij {
         }
     }
 
+    /**
+     * @return le nombre de proies
+     */
     public int get_pop() {
         int nb_Prey = 0;
 
