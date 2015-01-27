@@ -1,6 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
+
         if (args.length > 0) {
             if (args[0].equals("0")) {
                 SMA_Fish sm = new SMA_Fish();
@@ -19,7 +20,7 @@ public class Main {
 
 
             }
-            if (args[0].equals("1")){
+            if (args[0].equals("1")) {
                 SMA_Seg sm = new SMA_Seg();
                 while (sm.get_launch()) {
                     sm.play_it();
@@ -28,17 +29,20 @@ public class Main {
                 Logger log = new Logger("Satisfaction.log");
                 log.write_file(sm.s_log);
 
-            }
-            else {
+            } else {
                 System.out.println("Veuillez indiquer un argument\n" +
                         "0 pour l'application Fish\n" +
                         "1 pour l'application Segregation");
             }
-        }
-        else{
-            System.out.println("Veuillez indiquer un argument\n" +
-                    "0 pour l'application Fish\n" +
-                    "1 pour l'application Segregation");
+        } else {
+            SMA_Dij sm = new SMA_Dij();
+
+            while (sm.get_launch()) {
+                sm.play_it();
+            }
+            sm.stop_it();
+
+
         }
         System.out.println("Sortie...");
     }

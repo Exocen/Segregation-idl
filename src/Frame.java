@@ -23,7 +23,7 @@ public class Frame extends JFrame implements ActionListener {
         arret.addActionListener(this);
         ss.addActionListener(this);
         this.getContentPane().add(rect);
-        this.setSize(150 * 8, 150 * 8);
+        this.setSize(70 * 8, 70 * 8);
         this.setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

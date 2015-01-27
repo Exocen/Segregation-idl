@@ -14,9 +14,9 @@ public class Rect extends JComponent {
         for (Object[] i : donnees) {
             for (Object j : i) {
                 if (j == null) {
-                    g.setColor(Color.black);
+                    g.setColor(Color.white);
                 } else if (j.toString().equals(" ")) {
-                    g.setColor(Color.blue);
+                    g.setColor(Color.white);
                 } else if (j.toString().equals("R")) {
                     g.setColor(Color.red);
                 } else if (j.toString().equals("V")) {
@@ -25,6 +25,10 @@ public class Rect extends JComponent {
                     g.setColor(Color.red);
                 } else if (j.toString().equals("T")) {
                     g.setColor(Color.green);
+                } else if (j.toString().equals("P")) {
+                    g.setColor(Color.green);
+                } else if (j.toString().equals("H")) {
+                    g.setColor(Color.red);
                 }
 
                 g.fillRect(x, y, 5, 5);
