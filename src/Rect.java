@@ -14,9 +14,9 @@ public class Rect extends JComponent {
         for (Object[] i : donnees) {
             for (Object j : i) {
                 if (j == null) {
-                    g.setColor(Color.white);
+                    g.setColor(Color.blue);
                 } else if (j.toString().equals(" ")) {
-                    g.setColor(Color.white);
+                    g.setColor(Color.blue);
                 } else if (j.toString().equals("R")) {
                     g.setColor(Color.red);
                 } else if (j.toString().equals("V")) {
